@@ -63,6 +63,13 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
+static const char *volumeupcmd[] = { "volume_controls", "+5", NULL };
+static const char *volumedowncmd[] = { "volume_controls", "-5", NULL };
+
+static const char *mediaNext[] = { "playerctl", "next", NULL };
+static const char *mediaPrevious[] = { "playerctl", "previous", NULL };
+static const char *mediaToggle[] = { "playerctl", "play-pause", NULL };
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -98,6 +105,11 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ 0, XF86XK_AudioLowerVolume, spawn, {.v = volumedowncmd } },
+	{ 0, XF86XK_AudioRaiseVolume, spawn, {.v = volumeupcmd } },
+	{ 0, XF86XK_AudioNext, spawn, {.v = mediaNext } },
+	{ 0, XF86XK_AudioPrev, spawn, {.v = mediaPrevious } },
+	{ 0, XF86XK_AudioPlay, spawn, {.v = mediaToggle } }
 };
 
 /* button definitions */
